@@ -1,0 +1,66 @@
+# Tutorial de NetworkX en Google Colab
+**Autor:** [Flores Moreno Damian]  
+**Curso:** [Investigacion de operaciones]  
+**Fecha:** [07/09/2025]
+
+---
+
+## 📖 Introducción
+En este tutorial aprenderemos a utilizar la librería **NetworkX**, una herramienta muy potente en Python para el análisis y visualización de grafos y redes.  
+Veremos cómo crear grafos, añadir nodos y aristas, personalizar atributos y realizar análisis básicos.
+# Instalación (si es necesario en Colab)
+!pip install networkx matplotlib
+
+# Importar librerías
+import networkx as nx
+import matplotlib.pyplot as plt
+
+
+# Crear un grafo dirigido
+G = nx.DiGraph()
+
+# Agregar nodos
+G.add_node("A")
+G.add_nodes_from(["B", "C", "D"])  # añadir varios a la vez
+
+# Agregar aristas
+G.add_edge("A", "B")
+G.add_edges_from([("B", "C"), ("C", "D"), ("B", "D"), ("A", "C")])
+
+# Dibujar el grafo
+nx.draw(G, with_labels=True, node_color='lightblue', edge_color='gray',
+        node_size=2000, arrows=True)
+plt.title("Grafo dirigido")
+plt.show()
+# Añadir atributos a los nodos
+G.nodes["A"]["tipo"] = "inicio"
+G.nodes["D"]["tipo"] = "fin"
+
+# Añadir atributos a las aristas
+G["A"]["B"]["peso"] = 5
+G["B"]["C"]["peso"] = 3
+
+# Ver nodos con atributos
+print(G.nodes(data=True))
+
+# Ver aristas con atributos
+print(G.edges(data=True))
+# Grado de cada nodo
+print("Grado de nodos:", dict(G.degree()))
+
+# Camino más corto de A a D
+print("Camino más corto de A a D:", nx.shortest_path(G, source="A", target="D"))
+
+# Centralidad
+centralidad = nx.degree_centrality(G)
+print("Centralidad de los nodos:", centralidad)
+En este tutorial vimos cómo:
+- Crear y visualizar grafos con **NetworkX**.
+- Añadir nodos, aristas y atributos.
+- Calcular medidas básicas como grado, caminos más cortos y centralidad.
+
+NetworkX es muy útil en áreas como:
+- Redes sociales.
+- Análisis de transporte.
+- Biología de redes.
+- Comunicación de datos.
